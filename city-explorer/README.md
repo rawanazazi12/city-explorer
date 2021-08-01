@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# city-explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Author**: Rawan Alazazi    Version:1.0.0    
+## Overview 
 
-## Available Scripts
+Building a React application that uses the Axios library to make user-initiated reqeusts for data from a thrid-party API.
 
-In the project directory, you can run:
+## Getting Started
+- Creating a new Repo.
+- Creating a new react app in local machine.
+- Connect Github repo with React App.
+- Get the API access token form LocationIQ... put it in .env
+- Create form and it functions to takes user input (city name)
+- Request API, display longitude and latitude and image of map for location
+- Use URL base on longitude and latitude to request map API, and display img.
 
-### `npm start`
+## Architecture
+<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+ReactJS, bootstrap, and axios.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Credit and Collaborations
+I've worked with Qusai Tashtoush, we made a plan at first 15 minutes together.
 
-### `npm test`
+### Name of feature: Feature #1: Set up your React repository & API keys.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Estimate of time needed to complete: 1 hour
 
-### `npm run build`
+Start time: 1:30pm
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Finish time: 4:30pm 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Actual time needed to complete: 3 hours
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### Name of feature: Feature #2: Locations: latitude and longitude will be displayed on the page
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Estimate of time needed to complete: 3 Hours
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start time: 5:00pm
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Finish time: 7:00pm
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Actual time needed to complete: 2:00 hours 
 
-## Learn More
+### Name of feature: Feature #3: Map: Show the map of the area that user want to explore.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Estimate of time needed to complete:  1 hour
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Start time: 7:15pm
 
-### Code Splitting
+Finish time: 9:00pm
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Actual time needed to complete: 1 hour 45 minutes
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Name of feature: Feature #4: Errors: Show errors for user if something goes wrong.
 
-### Making a Progressive Web App
+Estimate of time needed to complete: 3 Hours
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Start time: 9:45pm
 
-### Advanced Configuration
+Finish time: 12:20am 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Actual time needed to complete: 2hr 5 minutes
