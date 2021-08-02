@@ -4,6 +4,7 @@ import './App.css';
 import axios from 'axios';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Weather from './Weather';
 
 
 export class App extends Component {
@@ -16,18 +17,20 @@ export class App extends Component {
       viewMapImage: false,
       viewError: false,
       errorMessage: '',
+      weatherDataArr: [],
+      viewWeatherData: false,
 
 
     }
   }
-  
+
   submittingForm = async (e) => {
     e.preventDefault();
     const location = e.target.locationName.value;
-  
-      console.log(this.locationLongitude, 'HIIIIIIII');
     try {
       const response = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_TOKEN}&q=${location}&format=json`);
+
+      const weatherResponse = await axios.get(`http://localhost:1220/weather?lat=${this.state.locationLatitude}&lon=${this.state.locationLongitude}`);
 
       this.setState({
         locationData: response.data[0],
@@ -35,22 +38,24 @@ export class App extends Component {
         locationLongitude: response.data[0].lon,
         viewMapImage: !false,
         viewError: false,
-        }
+        weatherDataArr: weatherResponse.data,
+        viewWeatherData: true,
+      }
       )
 
     }
 
-    catch (fault){
+    catch (fault) {
       this.setState(
         {
           viewError: true,
-          errorMessage:`${fault.response.status} ${fault.response.data.error}`
+          errorMessage: `${fault.response.status} ${fault.response.data.error}`
         }
       )
     }
 
   }
- 
+
   render() {
     return (
       <div>
@@ -78,10 +83,10 @@ export class App extends Component {
 
             }
             {
-              
+
               this.state.viewMapImage &&
-              <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_TOKEN}&center=${this.state.locationLatitude},${this.state.locationLongitude}`} alt='Map' style={{ marginBlock: '2%', width: '35rem', height: '35rem' }} 
-             >
+              <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_TOKEN}&center=${this.state.locationLatitude},${this.state.locationLongitude}`} alt='Map' style={{ marginBlock: '2%', width: '35rem', height: '35rem' }}
+              >
 
               </img>
             }
@@ -89,15 +94,30 @@ export class App extends Component {
           </div>
           <div>
 
-           {this.state.errorMessage} 
+            {this.state.errorMessage}
+            <ul>
+              {
+                this.state.weatherDataArr.map(value => {
+                  return <li>
+                    {value}
+                  </li>
+                })
+
+              }
+            </ul>
 
           </div>
-          
-        </div>
 
+        </div>
+        {
+
+          this.state.show &&
+          <Weather />
+
+        }
         <Footer />
       </div>
-     
+
     )
   }
 }
