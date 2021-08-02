@@ -15,7 +15,7 @@ export class App extends Component {
       locationLongitude: '',
       viewMapImage: false,
       viewError: false,
-      errorMessage: 'Unable to geocode'
+      errorMessage: '',
 
 
     }
@@ -35,18 +35,16 @@ export class App extends Component {
         locationLongitude: response.data[0].lon,
         viewMapImage: !false,
         viewError: false,
-
-
         }
       )
 
     }
 
-
-    catch {
+    catch (fault){
       this.setState(
         {
-          viewError: !false,
+          viewError: true,
+          errorMessage:`${fault.response.status} ${fault.response.data.error}`
         }
       )
     }
@@ -82,10 +80,16 @@ export class App extends Component {
             {
               
               this.state.viewMapImage &&
-              <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_TOKEN}&center=${this.state.locationLatitude},${this.state.locationLongitude}`} alt='Map' style={{ marginBlock: '2%', width: '35rem', height: '35rem' }} viewError={this.state.viewError} errorMessage={this.state.errorMessage}></img>
+              <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_TOKEN}&center=${this.state.locationLatitude},${this.state.locationLongitude}`} alt='Map' style={{ marginBlock: '2%', width: '35rem', height: '35rem' }} 
+             >
+
+              </img>
             }
 
+          </div>
+          <div>
 
+           {this.state.errorMessage} 
 
           </div>
           
@@ -93,6 +97,7 @@ export class App extends Component {
 
         <Footer />
       </div>
+     
     )
   }
 }
