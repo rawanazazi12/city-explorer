@@ -30,7 +30,7 @@ export class App extends Component {
     try {
       const response = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_TOKEN}&q=${location}&format=json`);
 
-      const weatherResponse = await axios.get(`http://localhost:1220/weather?lat=${this.state.locationLatitude}&lon=${this.state.locationLongitude}`);
+      const weatherResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/weather?lat=${this.state.locationLatitude}&lon=${this.state.locationLongitude}`);
 
       this.setState({
         locationData: response.data[0],
