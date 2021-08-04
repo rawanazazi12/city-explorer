@@ -47,18 +47,13 @@ export class App extends Component {
       
       this.setState({
         locationData: locationIqData,
-        // locationData: response.data[0],
-        // locationLatitude: response.data[0].lat,
-        // locationLongitude: response.data[0].lon,
         viewMapImage: !false,
         viewError: false,
         forecastData: weatherResponse.data,
-        
-        
         // weatherDataArr: weatherResponse,
         
         viewWeatherData: true,
-        viewError: false,
+        // viewError: false,
         
       })
       console.log(this.state.forecastData);
