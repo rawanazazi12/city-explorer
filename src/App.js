@@ -56,8 +56,7 @@ export class App extends Component {
         // viewError: false,
         
       })
-      console.log(this.state.forecastData);
-      const movieUrl = `${process.env.REACT_APP_SERVER_URL}movies?query=${locationName}`
+      const movieUrl = `${process.env.REACT_APP_SERVER_URL}/movies?query=${locationName}`;
       const moviesGet = await axios.get(movieUrl);
       console.log(moviesGet);
 
@@ -65,10 +64,9 @@ export class App extends Component {
         moviesDataArr: moviesGet.results,
         show: true,
         viewError: false,
-      })
+      });
       
       
-      console.log(this.state.forecastData+'HIIIIIIIIII')
     }
     catch (error) {
       this.setState(
