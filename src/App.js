@@ -154,7 +154,7 @@ export class App extends Component {
                     <p>Average Votes: {movie.average_votes}</p>
                     <p>Released on:{movie.released_on}</p>
                     <p>Popularity:{movie.poularity}</p>
-                    <img src={movie.image_url}></img>
+                    <img src={movie.image_url} alt='move cover'></img>
 
 
                   </div>
