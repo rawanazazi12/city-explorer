@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import axios from 'axios';
-
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { Container } from 'react-bootstrap';
 
 require('dotenv').config();
 // import Weather from './Weather';
@@ -19,7 +22,7 @@ export class App extends Component {
       // locationLongitude: '',
       viewMapImage: false,
       viewError: false,
-      errorMessage: 'ERROR: NO DATA AVAILABLE FOR THIS CITY',
+      errorMessage: 'ERROR: INVALID INPUT ',
       weatherDataArr: [],
       viewWeatherData: false,
       forecastData: [],
@@ -37,50 +40,42 @@ export class App extends Component {
 
 
       const locationIqData = response.data[0];
-      const locationName = locationIqData.display_name.split(',')[0];
-   
-      
+      // const locationName = locationIqData.display_name.split(',')[0];
+
+
       const weatherResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/weather?lat=${locationIqData.lat}&lon=${locationIqData.lon}`);
-      // const forecastData=weatherResponse[0].data;
-      // console.log(forecastData);
-      // console.log(weatherResponse);
-      
+
       this.setState({
         locationData: locationIqData,
         viewMapImage: !false,
         viewError: false,
         forecastData: weatherResponse.data,
         // weatherDataArr: weatherResponse,
-        
+
         viewWeatherData: true,
         // viewError: false,
-        
+
       })
-      const movieUrl = `${process.env.REACT_APP_SERVER_URL}/movies?query=${locationName}`;
+      const movieUrl = `${process.env.REACT_APP_SERVER_URL}/movies?query=${location}`;
       const moviesGet = await axios.get(movieUrl);
       console.log(moviesGet);
 
       this.setState({
-        moviesDataArr: moviesGet.results,
+        moviesDataArr: moviesGet.data,
         show: true,
         viewError: false,
       });
-      
-      
+
     }
     catch (error) {
       this.setState(
         {
           viewError: true,
-          // errorMessage: `${error.response.status(404)} ${error.response.data.error}`
         }
       )
     }
 
   }
-
-
-
 
   render() {
     return (
@@ -97,42 +92,49 @@ export class App extends Component {
             <input type='submit' value='Explore!' style={{ fontWeight: 'bold', color: 'brown', marginLeft: '1%' }}>
             </input>
           </form>
-          <div>
-            <h4 style={{ marginTop: '2%', marginBottom: '2%', textAlign: 'center', color: 'gray' }}>
-              Location Data
-            </h4>
+
+          {this.state.locationData.display_name &&
+            <div>
+              <Container>
+                <Row>
+                  <Col Col lg={12} xs="auto">
+                    <Card style={{ width: '19rem', height: '29rem', marginLeft: '26.5rem', marginBlock: '2rem', textAlign: 'center' }}>
+                      <Card.Img variant='top' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_TOKEN}&center=${this.state.locationData.lat},${this.state.locationData.lon}`} alt='Map' style={{ width: '19rem', height: '29rem' }} />
+                      <Card.Body>
+                        <Card.Title>Location Data</Card.Title>
+
+                        <Card.Text>
+                          {this.state.locationData.display_name}
+                          <br />
+                          Latitude: {this.state.locationData.lat}
+                          <br />
+                          Longitude: {this.state.locationData.lon}
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </Row>
+              </Container>
+              <h4 style={{ marginTop: '2%', marginBottom: '2%',marginLeft:'3rem', textAlign: 'center', color: 'gray' }}>
+                Weather Forecast Data
+              </h4>
+
+
+            </div>
+
+
+          }
+          <div style={{ textAlign: 'center', marginBlock: '2rem', marginLeft: '3rem' }}>
+
+            {this.state.viewError &&
+              'INVALID INPUT'}
+
             {
-              this.state.locationData.display_name &&
-              <p style={{ color: 'brown', fontSize: '16px', marginRight: '1%', fontWeight: 'bold' }}>
-                {this.state.locationData.display_name}, Latitude: {this.state.locationData.lat}, Longitude: {this.state.locationData.lon}
-              </p>
-              
-
-            }
-            {
-
-              this.state.viewMapImage &&
-              <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_TOKEN}&center=${this.state.locationData.lat},${this.state.locationData.lon}`} alt='Map' style={{ marginBlock: '2%', width: '35rem', height: '35rem' }}
-              >
-
-              </img>
-            }
-
-          </div>
-          <div>
-
-            {/* {this.state.errorMessage} */}
-            <h4 style={{ marginTop: '2%', marginBottom: '2%', textAlign: 'center', color: 'gray' }}>
-              Weather Data
-            </h4>
-
-            {
+           
               this.state.forecastData.map(weather => {
                 return (
                   <div>
-                    <p>{weather.date}</p>
-                    <p>{weather.description}</p>
-
+                    <p>{weather.date}, {weather.description}</p>
                   </div>
                 )
               })
@@ -142,11 +144,18 @@ export class App extends Component {
             {
               this.state.moviesDataArr.map(movie => {
                 return (
+
                   <div>
-                    <p>{movie.original_title}</p>
-                    <p>{movie.vote_count}</p>
-                    <p>{movie.overview}</p>
-                    <p>{movie.realesed_on}</p>
+                    <h4 style={{ marginTop: '2%', marginBottom: '2%', textAlign: 'center', color: 'gray' }}>
+                      Movie
+                    </h4>
+                    <p>Title: {movie.title}</p>
+                    <p>Overview: {movie.overview}</p>
+                    <p>Average Votes: {movie.average_votes}</p>
+                    <p>Released on:{movie.released_on}</p>
+                    <p>Popularity:{movie.poularity}</p>
+                    <img src={movie.image_url} alt='move cover'></img>
+
 
                   </div>
                 )
